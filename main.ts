@@ -15,7 +15,10 @@ namespace hicbit_control {
     export let X_axis: number = 0;
     export let Y_axis: number = 0;
     export let Z_axis: number = 0;
-
+    export let X_axis_direction: number = 0;
+    export let Y_axis_direction: number = 0;
+    export let Z_axis_direction: number = 0; 
+    
     export enum hicbit_key {
         //% block="up"
         up = 0x01,
@@ -124,16 +127,12 @@ namespace hicbit_control {
                     }
                 }
                 if (cmd_code == 0xC2) {
-                    X_axis = (strToNumber(handleCmd.substr(14, 2))<<8)|strToNumber(handleCmd.substr(12, 2));      //value1(X轴数值)
-                    Y_axis = (strToNumber(handleCmd.substr(18, 2))<<8)|strToNumber(handleCmd.substr(16, 2));      //value2(Y轴数值)
-                    Z_axis = (strToNumber(handleCmd.substr(22, 2))<<8)|strToNumber(handleCmd.substr(20, 2));      //value3(Z轴数值)
-                    if (X_axis > 0x7fff)
-                        X_axis = X_axis - 0x10000;
-                    if (Y_axis > 0x7fff)
-                        Y_axis = Y_axis - 0x10000;
-                    if (Z_axis > 0x7fff)
-                        Z_axis = Z_axis - 0x10000;
-                    
+                    X_axis = strToNumber(handleCmd.substr(14, 2));      //value1(X轴数值)
+                    Y_axis = strToNumber(handleCmd.substr(18, 2));      //value2(Y轴数值)
+                    Z_axis = strToNumber(handleCmd.substr(22, 2));      //value3(Z轴数值)
+                    X_axis_direction = strToNumber(handleCmd.substr(12, 2));
+                    Y_axis_direction = strToNumber(handleCmd.substr(16, 2));
+                    Z_axis_direction = strToNumber(handleCmd.substr(20, 2));
                 }
                 
             }
@@ -305,9 +304,9 @@ namespace hicbit {
 
     export enum motor_type {
         //% block="Medium_motor"
-        Medium_motor = 0x01,
+        Medium_motor = 0x02,
         //% block="Large_motor"
-        Large_motor = 0x02,
+        Large_motor = 0x03,
     }
 
     export enum motor_Turn {
@@ -1313,16 +1312,16 @@ namespace Sensor {
 
         switch (sensor_flag) {
             case 1:
-                sersor_value = -x_value;
-                break;
-            case 2:
                 sersor_value = x_value;
                 break;
+            case 2:
+                sersor_value = -x_value;
+                break;
             case 3:
-                sersor_value = y_value;
+                sersor_value = -y_value;
                 break;
             case 4:
-                sersor_value = -y_value;
+                sersor_value = y_value;
                 break;
             case 5:
                 sersor_value = z_value;
@@ -1332,6 +1331,8 @@ namespace Sensor {
                 break;
                    
         }
+        if (sersor_value < 0)
+            sersor_value = 0;
 
         switch (symbol)
         {
@@ -1399,6 +1400,7 @@ namespace Sensor {
         serial.writeBuffer(buf);
 
         basic.pause(50);
+
     }
 
     /**
