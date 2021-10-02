@@ -1318,10 +1318,10 @@ namespace Sensor {
 
         switch (sensor_flag) {
             case 1:
-                sersor_value = x_value;
+                sersor_value = -x_value;
                 break;
             case 2:
-                sersor_value = -x_value;
+                sersor_value = x_value;
                 break;
             case 3:
                 sersor_value = -y_value;
