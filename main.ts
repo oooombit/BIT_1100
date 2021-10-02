@@ -1324,10 +1324,10 @@ namespace Sensor {
                 sersor_value = x_value;
                 break;
             case 3:
-                sersor_value = -y_value;
+                sersor_value = y_value;
                 break;
             case 4:
-                sersor_value = y_value;
+                sersor_value = -y_value;
                 break;
             case 5:
                 sersor_value = z_value;
