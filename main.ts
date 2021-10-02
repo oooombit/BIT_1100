@@ -124,20 +124,20 @@ namespace hicbit_control {
                     }
                 }
                 if (cmd_code == 0xC2) {
-                    if (strToNumber(handleCmd.substr(12, 2)) == 1)
-                        X_axis = strToNumber(handleCmd.substr(14, 2)) * -1;      //value1(X轴数值)
-                    else if (strToNumber(handleCmd.substr(12, 2)) == 0)
-                        X_axis = strToNumber(handleCmd.substr(14, 2));
+                    if (strToNumber(handleCmd.substr(14, 2)) == 1)
+                        X_axis = strToNumber(handleCmd.substr(16, 2)) * -1;      //value1(X轴数值)
+                    else if (strToNumber(handleCmd.substr(14, 2)) == 0)
+                        X_axis = strToNumber(handleCmd.substr(16, 2));
                     
-                    if (strToNumber(handleCmd.substr(16, 2)) == 1)
-                        Y_axis = strToNumber(handleCmd.substr(18, 2)) * -1;      //value2(Y轴数值)
-                    else if (strToNumber(handleCmd.substr(16, 2)) == 0)
-                        Y_axis = strToNumber(handleCmd.substr(18, 2));
+                    if (strToNumber(handleCmd.substr(18, 2)) == 1)
+                        Y_axis = strToNumber(handleCmd.substr(20, 2)) * -1;      //value2(Y轴数值)
+                    else if (strToNumber(handleCmd.substr(18, 2)) == 0)
+                        Y_axis = strToNumber(handleCmd.substr(20, 2));
                     
-                    if (strToNumber(handleCmd.substr(20, 2)) == 1)
-                        Z_axis = strToNumber(handleCmd.substr(22, 2)) * -1;      //value3(Z轴数值)
-                    else if (strToNumber(handleCmd.substr(20, 2)) == 0)
-                        Z_axis = strToNumber(handleCmd.substr(22, 2));
+                    if (strToNumber(handleCmd.substr(22, 2)) == 1)
+                        Z_axis = strToNumber(handleCmd.substr(24, 2)) * -1;      //value3(Z轴数值)
+                    else if (strToNumber(handleCmd.substr(22, 2)) == 0)
+                        Z_axis = strToNumber(handleCmd.substr(24, 2));
                     
                 }
                 
